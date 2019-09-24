@@ -163,6 +163,8 @@ dialogProps 是 传到 @material-ui/core/Dialog 上的 props，详见其 [API](h
 
 caoyunyang 有问题或建议欢迎反馈
 
+## 1.0.0 前 api 不稳定，使用时注意版本锁定
+
 ## Changelog
 
 - 190926: initial commit

@@ -18,11 +18,20 @@
       "modules": true
     }
   },
+  "settings": {
+    "react": {
+      "version": "detect",
+    },
+  },
   "plugins": [
     "react",
+    "react-hooks",
     "babel"
   ],
   "rules": {
+    // react hooks
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
     "react/display-name": [
       "off",
       {

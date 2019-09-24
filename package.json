@@ -1,6 +1,6 @@
 {
 	"name": "@sogou/use-open-dialog",
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"description": "基于 @material-ui/core/Dialog，使用 hooks API 方式弹出模态框",
 	"main": "./dist/index.js",
 	"bin": {},

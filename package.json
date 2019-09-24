@@ -1,0 +1,34 @@
+{
+	"name": "@sogou/use-open-dialog",
+	"version": "0.0.0",
+	"description": "基于 @material-ui/core/Dialog，使用 hooks API 方式弹出模态框",
+	"main": "./dist/index.js",
+	"bin": {},
+	"scripts": {
+		"lint": "eslint --ext .js,.jsx ./src/",
+		"test": "npm run lint & istanbul cover _mocha -- test/ --no-timeouts",
+		"build": "npm run lint & npm run test & gulp"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://git.sogou-inc.com/koala-component/sogou/use-open-dialog.git"
+	},
+	"author": "caoyunyang@sogou-inc.com",
+	"license": "MIT",
+	"dependencies": {},
+	"devDependencies": {
+		"eslint": "^5.2.0",
+		"gulp": "^3.9.1",
+		"gulp-rimraf": "^0.2.0",
+		"istanbul": "^0.4.5",
+		"eslint-plugin-react": "^7.10.0",
+		"eslint-plugin-babel": "^5.1.0",
+		"eslint-plugin-import": "^2.13.0",
+		"eslint-plugin-jsx-a11y": "^6.1.1",
+		"babel-eslint": "^10.0.1",
+		"mocha": "^5.2.0"
+	},
+	"engines": {
+		"node": ">=8.0"
+	}
+}

@@ -67,7 +67,7 @@
       "error",
       "line-aligned"
     ],
-    "react/jsx-closing-tag-location": "error",
+    // "react/jsx-closing-tag-location": "error",
     "react/jsx-curly-spacing": [
       "error",
       "never",
@@ -236,18 +236,18 @@
         }
       }
     ],
-    "react/jsx-wrap-multilines": [
-      "error",
-      {
-        "declaration": "parens-new-line",
-        "assignment": "parens-new-line",
-        "return": "parens-new-line",
-        "arrow": "parens-new-line",
-        "condition": "parens-new-line",
-        "logical": "parens-new-line",
-        "prop": "parens-new-line"
-      }
-    ],
+    // "react/jsx-wrap-multilines": [
+    //   "error",
+    //   {
+    //     "declaration": "parens-new-line",
+    //     "assignment": "parens-new-line",
+    //     "return": "parens-new-line",
+    //     "arrow": "parens-new-line",
+    //     "condition": "parens-new-line",
+    //     "logical": "parens-new-line",
+    //     "prop": "parens-new-line"
+    //   }
+    // ],
     "react/jsx-first-prop-new-line": [
       2,
       "multiline-multiprop"

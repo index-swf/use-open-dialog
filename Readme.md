@@ -7,6 +7,7 @@
 - 通过 返回 Promise 对象，可以传递对话框异步关闭后的状态和结果
 - api 简单易用，不用写大量的样板代码
 - 支持 jsx 方式书写 DialogContent，便于传入 props 属性
+- DialogContent 里面的内容也可以获取到全局 Provider 的值
 
 ## 使用方法
 
@@ -22,7 +23,7 @@ npm install --save @sogou/use-open-dialog
 
 #### Demo
 
-在 [codeSandbox](https://codesandbox.io/s/github/index-swf/use-open-dialog/tree/master/) 中试试看 
+在 [codeSandbox](https://codesandbox.io/s/github/index-swf/use-open-dialog-demo/tree/master/) 中试试看 
 
 
 
@@ -31,14 +32,14 @@ npm install --save @sogou/use-open-dialog
 ```jsx
 import React from 'react';
 import ReactDom from 'react-dom';
-import { OpenModalProvider } from '@sogou/use-open-dialog';
+import { OpenDialogProvider } from '@sogou/use-open-dialog';
 
-// 使用前需要把 OpenModalProvider 放到全局
+// 使用前需要把 OpenDialogProvider 放到全局
 // 注意和其他Provider 的嵌套层次
-// 为了使模态框中的内容也可以获取到其他 Provider 的值，建议把 OpenModalProvider 放在尽量内层的位置
-const App = ({ children }) => <OpenModalProvider>
+// 为了使模态框中的内容也可以获取到其他 Provider 的值，建议把 OpenDialogProvider 放在尽量内层的位置
+const App = ({ children }) => <OpenDialogProvider>
   {children}
-</OpenModalProvider>;
+</OpenDialogProvider>;
 
 ReactDom.render(<App>{your app content}</App>, document.querySelector('#root-container'));
 
@@ -49,15 +50,15 @@ ReactDom.render(<App>{your app content}</App>, document.querySelector('#root-con
 ```jsx
 import React from "react";
 import { Button } from "@material-ui/core";
-import useOpenModal from "@sogou/use-open-modal";
+import useOpenDialog from "@sogou/use-open-dialog";
 import CreateOrEditUserDialog from "./CreateOrEditUserDialog";
 
 const Demo = () => {
-  const openModal = useOpenModal();
+  const openDialog = useOpenDialog();
   const handleClick = () =>
   	// 这个函数调用返回一个 Promise 对象，确定/取消 回调对应其 resolved/rejected 状态
   	// 调用回调的传参就是 [[PromiseValue]] 的值
-    openModal(<CreateOrEditUserDialog id={123} />, {
+    openDialog(<CreateOrEditUserDialog id={123} />, {
       // 这里的 option 详见 materialUI/Dialog api https://material-ui.com/api/dialog/#props
       disableBackdropClick: true
     }).then(
@@ -94,7 +95,7 @@ import {
   DialogActions,
   Button
 } from "@material-ui/core";
-import { ModalContext } from "@sogou/use-open-modal";
+import { ModalContext } from "@sogou/use-open-dialog";
 import Demo from "./demo";
 
 const CreateOrEditUserDialog = ({ id }) => {
@@ -133,25 +134,44 @@ export default CreateOrEditUserDialog;
 
 ## API
 
-#### useOpenModal
+#### useOpenDialog
 
 `<Promise<returnedValue> Function(dialogContent: ReactNode, dialogProps?: Object)> Function()`
 
-useOpenModal 是一个 hook api，它遵循 [React Hooks api 规范](https://reactjs.org/docs/hooks-rules.html)，需要按规范调用。它返回一个 openModal 函数，其定义如下：
+useOpenDialog 是一个 hook api，它遵循 [React Hooks api 规范](https://reactjs.org/docs/hooks-rules.html)，需要按规范调用。它返回一个 openDialog 函数，其定义如下：
 
 Promise<returnedValue> Function(dialogContent: ReactNode, dialogProps?: Object)
 
-openModal 的返回值 是一个 Promise ，Promise[[PromiseValue]]是对话框异步关闭后的结果
+openDialog 的返回值 是一个 Promise ，Promise[[PromiseValue]]是对话框异步关闭后的结果
 
 dialogContent 是对话框的内容
 
 dialogProps 是 传到 @material-ui/core/Dialog 上的 props，详见其 [API](https://material-ui.com/api/dialog/#props)
 
-#### OpenModalProvider
+#### useConfirm
+
+`void Function(confirmOptions: Object)> Function()`
+
+useConfirm 是一个 hook api，它遵循 [React Hooks api 规范](https://reactjs.org/docs/hooks-rules.html)，需要按规范调用。它返回一个 confirm 函数，其定义如下：
+
+```
+void Function({
+  title?: string | ReactNode,
+  content?: string | reactNode,
+  okText?: string | ReactNode,
+  cancelText?: string | ReactNode,
+  onOk?: <Promise<void> | void> Function(),
+  onCancel?: <Promise<void> | void> Function(),
+})
+```
+
+confirm 的 api 与 antd 的 Modal.confirm 类似，onOk 和 onCancel 支持异步过程，当传入一个返回 Promise 的函数时，pending 时按钮显示为 loading 状态，resolved 时，对话框关闭，rejected 时，取消关闭
+
+#### OpenDialogProvider
 
 `React.FC<Props{}>`
 
-这是一个 Provider 组件，为 useOpenModal 提供全局数据，用法详见demo
+这是一个 Provider 组件，为 useOpenDialog 提供全局数据，用法详见demo
 
 #### ModalContext
 
@@ -167,7 +187,8 @@ caoyunyang 有问题或建议欢迎反馈
 
 ## Changelog
 
-- 190926: initial commit
+- 190925: add useConfirm
+- 190924: initial commit
 
 
 
